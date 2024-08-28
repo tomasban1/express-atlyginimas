@@ -1,4 +1,3 @@
-console.log('Labas');
 
 const formDOM = document.forms[0];
 const inputDOMs = formDOM.querySelectorAll('input');
@@ -15,7 +14,7 @@ formDOM.addEventListener('submit', (e) => {
         rate: rateDOM.value,
     };
 
-    const result = fetch('http://localhost:5018/api/acount', {
+    fetch('http://localhost:5018/api/account', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
@@ -24,6 +23,6 @@ formDOM.addEventListener('submit', (e) => {
     })
         .then(res => res.json())
         .then(data => console.log(data))
-        .catch(err => console.error(err))
+    // .catch(err => console.error(err))
 
 });

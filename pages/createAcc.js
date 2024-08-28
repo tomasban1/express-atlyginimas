@@ -1,4 +1,4 @@
-import { data } from "../data/accountsData.js";
+
 import { footer } from "./components/footer.js";
 import { head } from "./components/head.js";
 import { header } from "./components/header.js";
@@ -40,7 +40,7 @@ export function createAcc() {
             </form>
         </main>
        ${footer()}
-       <script src="/js/createAccount.js" type="module"></script>
+       <script type="module" src="/js/create-account.js"></script>
     </body>
     </html>`;
 }
