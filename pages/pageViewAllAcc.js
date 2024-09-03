@@ -2,11 +2,21 @@ import { data } from "../data/accountsData.js";
 import { footer } from "./components/footer.js";
 import { head } from "./components/head.js";
 import { header } from "./components/header.js";
+import { workDaysCount } from "../lib/helpers.js";
 
 
 
 export function pageAllAcc() {
+    const now = new Date();
+    const currYear = now.getFullYear();
+    const currMonth = now.getMonth() + 1;
 
+    const prevYear = currMonth - 1 ? currYear - 1 : currYear;
+    const prevMonth = currMonth - 1 || 12;
+
+    const workHoursPerDay = 8;
+    const prevMonthWorkDays = workDaysCount(prevYear, prevMonth);
+    const currMonthWorkDays = workDaysCount(currYear, currMonth);
 
     return `
         <!DOCTYPE html>
@@ -27,7 +37,8 @@ export function pageAllAcc() {
                         <td>Name</td>
                         <td>Starting date</td>
                         <td>Hourly pay</td>
-                        <td>Salary</td>
+                        <td>Previous month</td>
+                        <td>Current month</td>
                     </tr>
                 </thead>
                 <tbody>
@@ -37,7 +48,8 @@ export function pageAllAcc() {
                             <td>${item.name}</td>
                             <td>${item.date}</td>
                             <td>${item.rate}</td>
-                            <td>${item.salary}</td>
+                            <td>${prevMonthWorkDays} d.d. (${item.rate * prevMonthWorkDays * workHoursPerDay} Eur)</td>
+                            <td>${currMonthWorkDays} d.d. (${item.rate * currMonthWorkDays * workHoursPerDay} Eur)</td>
                         </tr>`).join('')}
                 </tbody>
             </table>

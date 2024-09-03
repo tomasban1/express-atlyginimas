@@ -16,28 +16,30 @@ export function acountPost(req, res) {
     const validation = {
         name: {
             func: isName,
-            trans: 'vardas'
+            trans: 'person name',
         },
         date: {
             func: isDate,
-            trans: 'isidarbinimo data'
+            trans: 'date of employment',
         },
         rate: {
             func: isRate,
-            trans: 'ialandinis atlyginimas'
+            trans: 'hourly pay',
         },
     }
 
     let sizeErrorMessage = '';
-    const keys = Object.keys(validation)
-    for (let i = 0; i < keys; i++) {
+
+    const keys = Object.keys(validation);
+    for (let i = 0; i < keys.length; i++) {
         const key = keys[i];
-        sizeErrorMessage += `${key} (${validation[key].trans})`
+        sizeErrorMessage += `${key} (${validation[key].trans})`;
+
         if (keys.length > 1) {
             if (i === keys.length - 2) {
-                sizeErrorMessage += ', '
+                sizeErrorMessage += ' and '
             } else if (i < keys.length - 2) {
-                sizeErrorMessage += ' ir'
+                sizeErrorMessage += ', '
             }
         }
     }
@@ -48,7 +50,7 @@ export function acountPost(req, res) {
     if (Object.keys(req.body).length !== requiredDataKeysCount) {
         return res.json({
             status: 'error',
-            message: sizeErrorMessage,
+            message: `Wrong data structure, expected: ` + sizeErrorMessage,
         });
     }
 
